@@ -13,8 +13,17 @@
       Question 1
     </div>
     <div class="card-body">
-      <h5 class="card-title">You're more productive when you're ?</h5>
-      <p class="card-text">Section for answewer</p>
+      <!-- <h5 class="card-title">You're more productive when you're ?</h5>
+      <p class="card-text">Section for answewer</p> -->
+      <form action="#" method="POST">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"><h5>You're more productive when you're in which location?</h5></label>
+          <input type="text" class="form-control" id="exampleInputText" aria-describedby="textHelp" placeholder="type here" name="query1">
+          <div id="emailHelp" class="form-text">Type you're answer in the answer box above.</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <h4>{{ans}}</h4>
       <div class="row">
           <div class="col-sm-6">
             <!-- <a href="#" class="btn btn-danger">Back</a> -->
