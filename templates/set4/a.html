@@ -5,23 +5,21 @@
 {% block content %}
 
 <div class="progress" style="width: 70%" >
-  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 25%" data-bs-toggle="tooltip" data-bs-placement="bottom" title=" 25% complete">25%</div>
+  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 98%" data-bs-toggle="tooltip" data-bs-placement="bottom" title=" 98% complete">98%</div>
 </div>
 
 <div class="card" style="width: 70%">
     <div class="card-header">
-      Question 1
+      Question 4
     </div>
     <div class="card-body">
       <!-- <h5 class="card-title">You're more productive when you're ?</h5>
       <p class="card-text">Section for answewer</p> -->
-      <form action="/set1/a" method="POST">
+      <form action="/set4/a" method="POST">
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label" ><h5>You're more productive when you're ?</h5></label>
-          <input type="text" class="form-control" id="exampleInputText" aria-describedby="textHelp" placeholder="type here" name="query1" required>          
-          <div class="invalid-feedback">
-            Type your answer in the answer box above.
-          </div>
+          <label for="exampleInputEmail1" class="form-label"><h5>Only 2 weeks are left before your friend's birthday party . How are the preparations going ?</h5></label>
+          <input type="text" class="form-control" id="exampleInputText" aria-describedby="textHelp" placeholder="type here" name="query4">
+          <div id="emailHelp" class="form-text">Type you're answer in the answer box above.</div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
@@ -33,7 +31,7 @@
           </div>
           <div class="col-sm-6">
             <div class="text-end">
-                <a href="/set2/a" class="btn btn-primary">Next</a>
+                <a href="/set4/a.html" class="btn btn-primary">Next</a>
               </div>
 
           </div>
