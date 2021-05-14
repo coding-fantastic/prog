@@ -47,7 +47,10 @@ def set2():
       if  "can you repeat that please" in temp:
          return render_template('/set2/a.html', ans="can you please try again ")
       else:
-         temp = temp[0]
+         if "intution" in temp:
+            temp  = temp[1]
+         else:
+            temp = temp[0]
          if len(finaltype) != 1:
             # finaltype.popleft()
             return render_template('/set1/a.html', ans="queue was greater than one.")
@@ -76,6 +79,11 @@ def set3():
          return render_template('/set4/a.html')
    return render_template('/set3/a.html')
 
+
+# process the type and render careers and careers to avoid
+def processType(f):
+   f= d
+
 @app.route('/set4/a', methods=["POST","GET"])
 def set4():
    if request.method =="POST":
@@ -93,15 +101,11 @@ def set4():
             return render_template('/set1/a.html', ans="queue was greater than three.")
          finaltype.append(temp.upper())
          print("\nqueue =>" + str(finaltype)+ "\n")         
-         f = finaltype[0] + finaltype[1] + finaltype[2] + finaltype[3]
-         return render_template('/final.html', type = f)
+         cleanedAbrr = finaltype[0] + finaltype[1] + finaltype[2] + finaltype[3]
+         processType(cleanedAbrr)
+         return render_template('/final.html', type = cleanedAbrr)
    return render_template('/set4/a.html')
 
-
-@app.route('/final')
-def final():
-   f = finaltype[0] + finaltype[1] + finaltype[2] + finaltype[3]
-   return render_template('/final.html', type = f)
 
 
 
