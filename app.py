@@ -54,7 +54,7 @@ def set2():
             temp = temp[0]
          if len(finaltype) != 1:
             # finaltype.popleft()
-            return render_template('/set1/a.html', ans="queue was greater than one.")
+            return render_template('/set1/a.html', ans="queue was greater than one. Start again")
          finaltype.append(temp.upper())
          print("\nqueue =>" + str(finaltype)+ "\n")         
          return render_template('/set3/a.html')
@@ -74,7 +74,7 @@ def set3():
       else:
          temp = temp[0]
          if len(finaltype) != 2:
-            return render_template('/set1/a.html', ans="queue was greater than two.")
+            return render_template('/set1/a.html', ans="queue was greater than two. Start again")
          finaltype.append(temp.upper())
          print("\nqueue =>" + str(finaltype)+ "\n")         
          return render_template('/set4/a.html')
@@ -95,7 +95,7 @@ def set4():
       else:
          temp = temp[0]
          if len(finaltype) != 3:
-            return render_template('/set1/a.html', ans="queue was greater than three.")
+            return render_template('/set1/a.html', ans="queue was greater than three.Start again")
          finaltype.append(temp.upper())
          print("\nqueue =>" + str(finaltype)+ "\n")         
          cleanedAbrr = finaltype[0] + finaltype[1] + finaltype[2] + finaltype[3]
@@ -107,7 +107,7 @@ def set4():
 
 @app.route('/result/<string:abrr>')
 def result(abrr):
-   typeTblAndCareersTblList , careersToAvoidList = readDb("ISTJ")
+   typeTblAndCareersTblList , careersToAvoidList = readDb(abrr)
    
    return render_template('/final.html', type = abrr , typeTblAndCareersTblList = typeTblAndCareersTblList , careersToAvoidList = careersToAvoidList)
 
