@@ -29,7 +29,7 @@
 
 
   <div class="container">
-    <label for=""> Your personality type is {{typeTblAndCareersTblList[0][0]}}</label> &nbsp; ({{typeTblAndCareersTblList[0][1]}})
+    <font color="white"> </font><label for=""> Your personality type is {{typeTblAndCareersTblList[0][0]}}</label> &nbsp; ({{typeTblAndCareersTblList[0][1]}}) </font>
     <br><br>
 
     <div class="text-center">
@@ -39,8 +39,8 @@
 
     {% for careerTbl in typeTblAndCareersTblList %}
       <font color = "blue"> {{ careerTbl[2] }} </font>  &nbsp;
-      {{ careerTbl[3] }} <br>
-      In Univrisity and college they can be found under {{ careerTbl[5] }} schools  offering this  are  {{ careerTbl[4] }}.
+      <font color="white"> {{ careerTbl[3] }} <br> 
+      In Univrisity and college they can be found under {{ careerTbl[5] }} schools  offering this  are  {{ careerTbl[4] }}. </font>
       <br><br>
     {% endfor %}
 
@@ -51,12 +51,12 @@
 
     {% for careersToAvoid in careersToAvoidList %}
       <font color = "red"> {{ careersToAvoid[1] }} </font>  &nbsp;
-      {{ careersToAvoid[2] }} 
+      <font color="white"> {{ careersToAvoid[2] }} </font>
       <br><br>
     {% endfor %}
     
     
-    <div class="container-fluid padding">
+    <font color="white"> <div class="container-fluid padding">
       <div class="row-text-center">
         <div class="col-md-4">
           <h2>Contact Us</h2>
@@ -65,7 +65,7 @@
           <p>+254722334455</p>
         <p>+254723659884</p>
         <p>Nairobi-00100</p>
-        </div>
+        </div> </font>
     
       </div>
     

@@ -111,6 +111,9 @@ def result(abrr):
    
    return render_template('/final.html', type = abrr , typeTblAndCareersTblList = typeTblAndCareersTblList , careersToAvoidList = careersToAvoidList)
 
+@app.route("/cover")
+def cover():
+   return render_template('cover.html')
 
 if __name__ =="__main__":
     app.run(debug=True)
