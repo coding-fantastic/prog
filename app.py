@@ -1,7 +1,7 @@
 from flask import Flask  , render_template , request , redirect , url_for
 from main2 import ach
 from collections import deque
-# from dbConn import readDb
+from dbConn import readDb
 
 app = Flask(__name__)
 
@@ -107,7 +107,9 @@ def set4():
 
 @app.route('/result/<string:abrr>')
 def result(abrr):
-   return render_template('/final.html', type = abrr)
+   typeTblAndCareersTblList , careersToAvoidList = readDb("ISTJ")
+   
+   return render_template('/final.html', type = abrr , typeTblAndCareersTblList = typeTblAndCareersTblList , careersToAvoidList = careersToAvoidList)
 
 
 if __name__ =="__main__":
