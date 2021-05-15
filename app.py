@@ -1,6 +1,7 @@
 from flask import Flask  , render_template , request , redirect , url_for
 from main2 import ach
 from collections import deque
+# from dbConn import readDb
 
 app = Flask(__name__)
 
@@ -79,11 +80,7 @@ def set3():
          return render_template('/set4/a.html')
    return render_template('/set3/a.html')
 
-
-# process the type and render careers and careers to avoid
-def processType(f):
-   f= d
-
+abrr = ""
 @app.route('/set4/a', methods=["POST","GET"])
 def set4():
    if request.method =="POST":
@@ -102,11 +99,15 @@ def set4():
          finaltype.append(temp.upper())
          print("\nqueue =>" + str(finaltype)+ "\n")         
          cleanedAbrr = finaltype[0] + finaltype[1] + finaltype[2] + finaltype[3]
-         processType(cleanedAbrr)
-         return render_template('/final.html', type = cleanedAbrr)
+         # readDb(cleanedAbrr)
+         # return render_template('/final.html', type = cleanedAbrr)
+         return redirect(url_for("result" , abrr =  cleanedAbrr) )
    return render_template('/set4/a.html')
+   # return render_template('/final.html')
 
-
+@app.route('/result/<string:abrr>')
+def result(abrr):
+   return render_template('/final.html', type = abrr)
 
 
 if __name__ =="__main__":
