@@ -13,7 +13,7 @@ def readDb(abrr):
     query = "SELECT * FROM `typeTbl`  "
     
     query2 = "SELECT typeTbl.typename ,typeTbl.typeabbr , careersTbl.careername, careersTbl.careerdef, careersTbl.schooloffering, careersTbl.coursename FROM typeTbl INNER JOIN careersTbl ON typeTbl.ttid = careersTbl.ttid WHERE typeTbl.typeabbr = '" + abrr+  "' "
-    query3 = "SELECT typeTbl.typeabbr , careersAvoidTbl.careername FROM typeTbl INNER JOIN careersAvoidTbl ON typeTbl.ttid = careersAvoidTbl.ttid WHERE typeTbl.typeabbr = '" + abrr+  "' "
+    query3 = "SELECT typeTbl.typeabbr , careersAvoidTbl.careername , careersAvoidTbl.reason FROM typeTbl INNER JOIN careersAvoidTbl ON typeTbl.ttid = careersAvoidTbl.ttid WHERE typeTbl.typeabbr = '" + abrr+  "' "
     
     mycursor.execute(query2  )
     typeTblAndCareersTblList = []
