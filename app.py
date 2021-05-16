@@ -1,10 +1,12 @@
-from flask import Flask  , render_template , request , redirect , url_for
+from flask import Flask  , render_template , request , redirect , url_for  , session
 from main2 import ach
 from collections import deque
-from dbConn import readDb
+from dbConn import readDb , checkUser
+import hashlib
+
 
 app = Flask(__name__)
-
+app.secret_key = 'any random string'
 finaltype =  deque()
 
 @app.route("/")
@@ -114,6 +116,43 @@ def result(abrr):
 @app.route("/cover")
 def cover():
    return render_template('cover.html')
+
+
+@app.route("/login", methods=["POST","GET"])
+def login():
+   if request.method =="POST":
+      
+      email = request.form["email"]
+      passwd = request.form["passwd"]
+      passwd = hashlib.md5(passwd.encode())
+      passwd = passwd.hexdigest()
+      print("\njpassword -+ "  + str(passwd))
+      msg, username = checkUser(email, passwd)
+      print(msg)
+      if  "user not found" in msg:
+         return render_template('login.html', ans="User was not found ")
+      else:
+         session['username'] = username
+         # return render_template('dashboard.html' )
+
+         return redirect(url_for("dashboard" ) )
+
+      
+   return render_template('login.html')
+
+@app.route('/dashboard')
+def dashboard():
+   if 'username'  in session:
+      return render_template('dashboard.html')
+   else:
+      return render_template('login.html', ans="Please login")
+
+   return render_template('dashboard.html' )
+
+@app.route("/logout")
+def logout():
+   session.pop("username", None)
+   return redirect(url_for("login"))
 
 if __name__ =="__main__":
     app.run(debug=True)
