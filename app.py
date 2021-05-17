@@ -1,7 +1,7 @@
 from flask import Flask  , render_template , request , redirect , url_for  , session
 from main2 import ach
 from collections import deque
-from dbConn import readDb , checkUser
+from dbConn import readDb , checkUser , newAns
 import hashlib
 
 
@@ -23,6 +23,8 @@ def set1a():
       temp = ach(tempans)
 
       if  "can you repeat that please" in temp:
+         queryNumber = 1
+         newAns(tempans , queryNumber)
          return render_template('/set1/a.html', ans="can you please try again ")
       else:
 
@@ -48,6 +50,8 @@ def set2():
       temp = ach(tempans)
 
       if  "can you repeat that please" in temp:
+         queryNumber = 2
+         newAns(tempans , queryNumber)
          return render_template('/set2/a.html', ans="can you please try again ")
       else:
          if "intution" in temp:
@@ -72,6 +76,8 @@ def set3():
       temp = ach(tempans)
 
       if  "can you repeat that please" in temp:
+         queryNumber = 3
+         newAns(tempans , queryNumber)
          return render_template('/set3/a.html', ans="can you please try again ")
       else:
          temp = temp[0]
@@ -93,6 +99,8 @@ def set4():
       temp = ach(tempans)
 
       if  "can you repeat that please" in temp:
+         queryNumber = 4
+         newAns(tempans , queryNumber)
          return render_template('/set4/a.html', ans="can you please try again ")
       else:
          temp = temp[0]
@@ -109,7 +117,9 @@ def set4():
 
 @app.route('/result/<string:abrr>')
 def result(abrr):
-   typeTblAndCareersTblList , careersToAvoidList = readDb(abrr)
+   # this value is used as a control on readDb function eg number 1  is for result
+   num = 1
+   typeTblAndCareersTblList , careersToAvoidList = readDb(abrr,num)
    
    return render_template('/final.html', type = abrr , typeTblAndCareersTblList = typeTblAndCareersTblList , careersToAvoidList = careersToAvoidList)
 
@@ -142,17 +152,36 @@ def login():
 
 @app.route('/dashboard')
 def dashboard():
+   # check if session is set if not go back to login 
    if 'username'  in session:
-      return render_template('dashboard.html')
+      num =2
+      abrr = "a"
+      rows = readDb(abrr , num )
+      return render_template('dashboard.html' , answersMissedList = rows)
    else:
       return render_template('login.html', ans="Please login")
 
-   return render_template('dashboard.html' )
+@app.route('/register', methods=["POST","GET"])
+def register():
+   # check if session is set if not go back to login 
+   if 'username'  in session:
+      if request.method == "POST":
+         username = request.form["username"]
+         email = request.form["email"]
+         passwd = request.form["passwd"]
+         confirmPasswd = request.form['confirmPasswd']
+         if passwd != confirmPasswd:
+            return render_template('register.html', ans = "password and confirm password didn't match . Please Try again")
+
+      return render_template('dashboard.html' )
+   else:
+      return render_template('login.html', ans="Please login")
+   
 
 @app.route("/logout")
 def logout():
    session.pop("username", None)
-   return redirect(url_for("login"))
+   return redirect(url_for("cover"))
 
 if __name__ =="__main__":
     app.run(debug=True)
