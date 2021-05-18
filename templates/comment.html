@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title%}Changed{% endblock %}
+
+{% block content %}
+
+<!-- <div class="progress" style="width: 70%" >
+  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 25%" data-bs-toggle="tooltip" data-bs-placement="bottom" title=" 25% complete">25%</div>
+</div> -->
+
+<div class="card" style="width: 70%">
+    <div class="card-header">
+      Do you have a Feedback /Comment  ?
+    </div>
+    <div class="card-body">
+      <!-- <h5 class="card-title">You're more productive when you're ?</h5>
+      <p class="card-text">Section for answewer</p> -->
+      <form action="/comment" method="POST">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label" ><h5>Your name?</h5></label>
+          <input type="text" class="form-control" id="exampleInputText" aria-describedby="textHelp" placeholder="type here" name="name" required>          
+          <label for="exampleInputEmail1" class="form-label" ><h5>Comment / Feedback</h5></label>
+          <input type="text" class="form-control" id="exampleInputText" aria-describedby="textHelp" placeholder="type here" name="comment" required>          
+          <div class="invalid-feedback">
+            Type your answer in the answer box above.
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <h4>{{ans}}</h4>
+      <div class="row">
+          <div class="col-sm-6">
+            <!-- <a href="#" class="btn btn-danger">Back</a> -->
+
+          </div>
+          <div class="col-sm-6">
+            <div class="text-end">
+                <!-- <a href="/set2/a" class="btn btn-primary">Next</a> -->
+              </div>
+
+          </div>
+        
+
+      </div>
+      
+      
+    </div>
+  </div>
+{% endblock %}
