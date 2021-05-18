@@ -1,7 +1,7 @@
 from flask import Flask  , render_template , request , redirect , url_for  , session
 from main2 import ach
 from collections import deque
-from dbConn import readDb , checkUser , newAns
+from dbConn import readDb , checkUser , newAns , insertComment
 import hashlib
 
 
@@ -182,6 +182,19 @@ def register():
 def logout():
    session.pop("username", None)
    return redirect(url_for("cover"))
+
+@app.route("/comment" , methods=["POST","GET"])
+def comment():
+   if request.method =="POST":
+      name = request.form["name"]
+      comment = request.form["comment"]
+      print ("name - " + str(name) + " comment " + str(comment) )
+      insertComment(name,comment)
+      return render_template('comment.html', ans = "Thank you for the comment")
+      
+   return render_template("comment.html")
+
+
 
 if __name__ =="__main__":
     app.run(debug=True)
