@@ -1,7 +1,7 @@
 from flask import Flask  , render_template , request , redirect , url_for  , session
 from main2 import ach
 from collections import deque
-from dbConn import readDb , checkUser , newAns , insertComment
+from dbConn import readDb , checkUser , newAns , insertComment , insertAdmin
 import hashlib
 
 
@@ -156,8 +156,11 @@ def dashboard():
    if 'username'  in session:
       num =2
       abrr = "a"
+      # if 2 read anwsers table 
       rows = readDb(abrr , num )
-      return render_template('dashboard.html' , answersMissedList = rows)
+      comments  = readDb(abrr, 3)
+      return render_template('dashboard.html' ,  answersMissedList = rows , comments = comments)
+      # return render_template('dashboard.html' , rows = rows)
    else:
       return render_template('login.html', ans="Please login")
 
@@ -168,12 +171,16 @@ def register():
       if request.method == "POST":
          username = request.form["username"]
          email = request.form["email"]
+         email= email.lower()
          passwd = request.form["passwd"]
          confirmPasswd = request.form['confirmPasswd']
          if passwd != confirmPasswd:
             return render_template('register.html', ans = "password and confirm password didn't match . Please Try again")
+         else:
+            insertAdmin(username,email,passwd)
+            return render_template('register.html', ans = "User created")
 
-      return render_template('dashboard.html' )
+      return render_template('register.html' )
    else:
       return render_template('login.html', ans="Please login")
    
