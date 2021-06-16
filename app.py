@@ -1,7 +1,7 @@
 from flask import Flask  , render_template , request , redirect , url_for  , session
 from main2 import ach
 from collections import deque
-from dbConn import readDb , checkUser , newAns , insertComment , insertAdmin
+from dbConn import readDb , checkUser , newAns , insertComment , insertAdmin , insertLoginLog
 import hashlib
 
 
@@ -10,8 +10,16 @@ app.secret_key = 'any random string'
 finaltype =  deque()
 
 @app.route("/")
+def index():
+   return redirect(url_for("cover"))
+
+@app.route("/home")
 def home():
-   return redirect(url_for("set1a"))
+   return redirect(url_for("cover"))
+
+@app.route("/dashboard2")
+def dashboard2():
+   return render_template('/CoolAdmin/index.html')
 
 @app.route('/set1/a', methods=["POST","GET"])
 def set1a():
@@ -142,7 +150,9 @@ def login():
       if  "user not found" in msg:
          return render_template('login.html', ans="User was not found ")
       else:
+         # user was found in the db now proceed to dashboard
          session['username'] = username
+         insertLoginLog(username)
          # return render_template('dashboard.html' )
 
          return redirect(url_for("dashboard" ) )
